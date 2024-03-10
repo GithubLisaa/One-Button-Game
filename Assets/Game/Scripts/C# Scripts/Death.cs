@@ -1,57 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Death : MonoBehaviour
 {
     private GameObject[] movingcubes;
     private GameObject[] movingspikes;
-    private GameObject deathscreen;
+    private GameObject[] deathscreen;
 
+    public bool dead = false;
     public float Posref = 0f;
-    public bool Showdeathscreen = false;
+    public float erreurmax = 0f;
 
     void Start()
     {
         movingcubes = GameObject.FindGameObjectsWithTag("MovingCube");
         movingspikes = GameObject.FindGameObjectsWithTag("MovingSpike");
-        deathscreen = GameObject.FindGameObjectWithTag("DeathScreen");
-        Showdeathscreen = false;
+        deathscreen = GameObject.FindGameObjectsWithTag("DeathScreen");
+        dead = false;
     }
     void Update()
     {
-        if (Showdeathscreen)
+        if (dead)
         {
-            deathscreen.SetActive(true);
+            foreach (GameObject Deathscreen in deathscreen)
+            {
+                MeshRenderer mesh = Deathscreen.GetComponent<MeshRenderer>();
+                mesh.enabled = true;
+            }
+            foreach (GameObject cube in movingcubes)
+            {
+                Movingelements scriptMoving = cube.GetComponent<Movingelements>();
+                scriptMoving.canmove = false;
+            }
+            foreach (GameObject spike in movingspikes)
+            {
+                Movingelements scriptMoving = spike.GetComponent<Movingelements>();
+                scriptMoving.canmove = false;
+            }
         }
         else
         {
-            deathscreen.SetActive(false);
-        }
-
-        foreach (GameObject cube in movingcubes)
-        {
-            Movingelements scriptMoving = cube.GetComponent<Movingelements>();
-            if (transform.position.z != Posref)
+            foreach (GameObject Deathscreen in deathscreen)
             {
-                scriptMoving.canmove = false;
+                MeshRenderer mesh = Deathscreen.GetComponent<MeshRenderer>();
+                mesh.enabled = false;
             }
         }
 
-        foreach (GameObject spike in movingspikes)
+        if (Mathf.Abs(transform.position.z - Posref) > erreurmax)
         {
-            Movingelements scriptMoving = spike.GetComponent<Movingelements>();
-            if (transform.position.z != Posref)
-            {
-                scriptMoving.canmove = false;
-            }
-        }
-
-        if (transform.position.z != Posref)
-        {
-            Showdeathscreen = true;
+            dead = true;
         }
     }
+
     void OnTriggerEnter(Collider spikes)
     {
         if (spikes.gameObject.CompareTag("MovingSpike"))
@@ -67,7 +70,7 @@ public class Death : MonoBehaviour
                 Movingelements scriptMoving = spike.GetComponent<Movingelements>();
                 scriptMoving.canmove = false;
             }
-            Showdeathscreen = true;
+            dead = true;
         }
     }
 }

@@ -127,3 +127,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canmove: 1
   speed: 1
+  dowereset: 0
