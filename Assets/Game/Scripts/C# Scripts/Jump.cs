@@ -47,7 +47,7 @@ public class Jump : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "MovingCube" || collision.gameObject.tag == "Floor")
+        if (collision.gameObject.tag == "MovingCube" || collision.gameObject.tag == "Floor" || collision.gameObject.tag == "Falling_Platform")
         {
             isjumping = false;
         }

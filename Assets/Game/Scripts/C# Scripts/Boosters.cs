@@ -32,5 +32,13 @@ public class Boosters : MonoBehaviour
         {
             rbody.AddForce(new Vector3(0, Bumperforce, 0), ForceMode.Impulse);
         }
+        if (element.gameObject.tag == "Speed_Boost" && !deathscript.dead)
+        {
+            gamecontrolscript.Game_speed = gamecontrolscript.Game_speed + gamecontrolscript.Speed_Boost;
+        }
+        if (element.gameObject.tag == "Speed_Reset" && !deathscript.dead)
+        {
+            gamecontrolscript.Game_speed = gamecontrolscript.gamespeedorigin;
+        }
     }
 }

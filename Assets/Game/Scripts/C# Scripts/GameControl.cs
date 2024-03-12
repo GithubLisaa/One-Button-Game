@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameControl : MonoBehaviour
 {
     private GameObject[] Fakeblocks;
+    private GameObject[] FallingPlatforms;
     private GameObject Movingelements;
     private GameObject Camera;
     private Death deathscript;
@@ -23,13 +24,18 @@ public class GameControl : MonoBehaviour
     public float Camera_player_max_high = 1f;
     public float Camera_player_max_low = 1f;
     public float Bumper_force = 1f;
+    public float Speed_Boost = 1f;
+    public float Crumble_Shake = 1f;
+    public float Platform_Timer = 1f;
     public bool Game_Reset = false;
+    public float gamespeedorigin = 1f;
 
     void Start()
     {
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
         Camera = GameObject.FindGameObjectWithTag("MainCamera");
         Fakeblocks = GameObject.FindGameObjectsWithTag("Fake_Block");
+        FallingPlatforms = GameObject.FindGameObjectsWithTag("Falling_Platform");
         originecamera = Camera.transform.position.y;
         camcontrol = Camera.GetComponent<Camera_Control>();
         Movingelements = GameObject.FindGameObjectWithTag("MovingElements");
@@ -37,6 +43,13 @@ public class GameControl : MonoBehaviour
         deathscript = gameObject.GetComponent<Death>();
         jump = gameObject.GetComponent<Jump>();
         boosterscript = gameObject.GetComponent<Boosters>();
+        gamespeedorigin = Game_speed;
+        foreach (GameObject platforms in FallingPlatforms)
+        {
+            FallingPlatform platformscript = platforms.GetComponent<FallingPlatform>();
+            platformscript.strengh_shake = Crumble_Shake;
+            platformscript.platformtimer = Platform_Timer;
+        }
     }
 
     void Update()
@@ -57,6 +70,7 @@ public class GameControl : MonoBehaviour
         {
             if (!antiloop)
             {
+                Game_speed = gamespeedorigin;
                 gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 movingscript.dowereset = true;
                 antiloop = true;
@@ -72,7 +86,13 @@ public class GameControl : MonoBehaviour
                 movingscript.canmove = true;
                 antiloop = false;
                 gameObject.GetComponent<Rigidbody>().isKinematic = false;
-
+                foreach (GameObject platforms in FallingPlatforms)
+                {
+                    FallingPlatform platformscript = platforms.GetComponent<FallingPlatform>();
+                    platformscript.strengh_shake = Crumble_Shake;
+                    platformscript.platformtimer = Platform_Timer;
+                    platformscript.dead = true;
+                }
                 foreach (GameObject fakeblock in Fakeblocks)
                 {
                     Fakeblock scriptfakeblock = fakeblock.GetComponent<Fakeblock>();

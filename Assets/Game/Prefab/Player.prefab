@@ -194,11 +194,15 @@ MonoBehaviour:
   Game_speed: 11
   Gravity: 100
   Jump_force: 19
-  Death_cube_collid_error: 0.15
+  Death_cube_collid_error: 0.3
   Camera_player_max_high: 2
   Camera_player_max_low: 3.5
-  Bumper_force: 30
+  Bumper_force: 29
+  Speed_Boost: 11
+  Crumble_Shake: 0.2
+  Platform_Timer: 0.3
   Game_Reset: 0
+  gamespeedorigin: 1
 --- !u!1 &5634235395118390007
 GameObject:
   m_ObjectHideFlags: 0

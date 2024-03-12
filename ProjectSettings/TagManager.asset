@@ -13,6 +13,9 @@ TagManager:
   - Reset_Gravity_Portal
   - Bumper
   - Fake_Block
+  - Speed_Boost
+  - Speed_Reset
+  - Falling_Platform
   layers:
   - Default
   - TransparentFX
