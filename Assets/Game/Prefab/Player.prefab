@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 44398619435721614}
   - component: {fileID: 7641947152438367500}
   - component: {fileID: 4441332150202814317}
+  - component: {fileID: 625967749004520559}
   - component: {fileID: 5712746266603793992}
   m_Layer: 0
   m_Name: Player
@@ -165,6 +166,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpforce: 1
+--- !u!114 &625967749004520559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312249916773201728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06be9bca496421f4c942c7a1122a61c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bumperforce: 1
 --- !u!114 &5712746266603793992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,6 +197,7 @@ MonoBehaviour:
   Death_cube_collid_error: 0.15
   Camera_player_max_high: 2
   Camera_player_max_low: 3.5
+  Bumper_force: 30
   Game_Reset: 0
 --- !u!1 &5634235395118390007
 GameObject:

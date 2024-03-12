@@ -9,6 +9,10 @@ TagManager:
   - Floor
   - DeathScreen
   - MovingElements
+  - Invert_Gravity_Portal
+  - Reset_Gravity_Portal
+  - Bumper
+  - Fake_Block
   layers:
   - Default
   - TransparentFX

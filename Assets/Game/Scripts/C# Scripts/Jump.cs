@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Jump : MonoBehaviour
 {
-    private Rigidbody body;
+    private Rigidbody rbody;
     private Death deathscript;
+    private GameControl gamecontrolscript;
     private bool onfloor = true;
     private bool isjumping = false;
 
@@ -13,13 +14,14 @@ public class Jump : MonoBehaviour
 
     void Start()
     {
-        body = GetComponent<Rigidbody>();
+        rbody = GetComponent<Rigidbody>();
         deathscript = gameObject.GetComponent<Death>();
+        gamecontrolscript = GetComponent<GameControl>();
     }
 
     void Update()
     {
-        if (Mathf.Abs(body.velocity.y) > 0.01f)
+        if (Mathf.Abs(rbody.velocity.y) > 0.01f)
         {
             onfloor = false;
         }
@@ -31,7 +33,14 @@ public class Jump : MonoBehaviour
         if (Input.anyKey && onfloor && !isjumping && !deathscript.dead)
         {
             gameObject.transform.position = new Vector3(0, transform.position.y, 0);
-            body.AddForce(new Vector3(0, jumpforce, 0), ForceMode.Impulse);
+            if (gamecontrolscript.Gravity>0)
+            {
+                rbody.AddForce(new Vector3(0, jumpforce, 0), ForceMode.Impulse);
+            }
+            else
+            {
+                rbody.AddForce(new Vector3(0, -jumpforce, 0), ForceMode.Impulse);
+            }
             onfloor = false;
             isjumping = true;
         }
