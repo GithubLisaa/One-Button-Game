@@ -17,6 +17,9 @@ public class GameControl : MonoBehaviour
     private float originecamera;
     private bool antiloop = false;
 
+    [HideInInspector]
+    public float gamespeedorigin = 1f;
+
     public float Game_speed = 1f;
     public float Gravity = 1f;
     public float Jump_force = 1f;
@@ -28,7 +31,6 @@ public class GameControl : MonoBehaviour
     public float Crumble_Shake = 1f;
     public float Platform_Timer = 1f;
     public bool Game_Reset = false;
-    public float gamespeedorigin = 1f;
 
     void Start()
     {
