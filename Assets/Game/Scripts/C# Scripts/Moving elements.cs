@@ -19,25 +19,16 @@ public class Movingelements : MonoBehaviour
     {
         if (canmove)
         {
-            if (gameObject.CompareTag("MovingCube"))
-            {
-                transform.Translate(Vector3.forward * speed * Time.deltaTime);
-            }
-            if (gameObject.CompareTag("MovingSpike"))
-            {
-                transform.Translate(Vector3.down * speed * Time.deltaTime);
-            }
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
             if (dowereset)
             {
                 transform.position = transformorigin;
-                canmove = true;
                 dowereset = false;
             }
         }
         else if (dowereset)
         {
             transform.position = transformorigin;
-            canmove = true;
             dowereset = false;
         }
     }

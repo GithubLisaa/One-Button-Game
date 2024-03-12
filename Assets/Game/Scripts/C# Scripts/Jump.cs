@@ -5,6 +5,7 @@ using UnityEngine;
 public class Jump : MonoBehaviour
 {
     private Rigidbody body;
+    private Death deathscript;
     private bool onfloor = true;
     private bool isjumping = false;
 
@@ -13,6 +14,7 @@ public class Jump : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody>();
+        deathscript = gameObject.GetComponent<Death>();
     }
 
     void Update()
@@ -26,8 +28,9 @@ public class Jump : MonoBehaviour
             onfloor = true;
         }
 
-        if (Input.anyKey && onfloor && !isjumping)
+        if (Input.anyKey && onfloor && !isjumping && !deathscript.dead)
         {
+            gameObject.transform.position = new Vector3(0, transform.position.y, 0);
             body.AddForce(new Vector3(0, jumpforce, 0), ForceMode.Impulse);
             onfloor = false;
             isjumping = true;

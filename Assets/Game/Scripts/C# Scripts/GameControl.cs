@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameControl : MonoBehaviour
 {
-    private GameObject[] movingcubes;
-    private GameObject[] movingspikes;
+    private GameObject Movingelements;
     private GameObject Camera;
     private Death deathscript;
     private Jump jump;
     private Camera_Control camcontrol;
+    private Movingelements movingscript;
     private float originecamera;
+    private bool antiloop = false;
 
     public float Game_speed = 1f;
     public float Gravity = 1f;
@@ -25,8 +27,8 @@ public class GameControl : MonoBehaviour
         Camera = GameObject.FindGameObjectWithTag("MainCamera");
         originecamera = Camera.transform.position.y;
         camcontrol = Camera.GetComponent<Camera_Control>();
-        movingcubes = GameObject.FindGameObjectsWithTag("MovingCube");
-        movingspikes = GameObject.FindGameObjectsWithTag("MovingSpike");
+        Movingelements = GameObject.FindGameObjectWithTag("MovingElements");
+        movingscript = Movingelements.GetComponent<Movingelements>();
         deathscript = gameObject.GetComponent<Death>();
         jump = gameObject.GetComponent<Jump>();
     }
@@ -38,35 +40,25 @@ public class GameControl : MonoBehaviour
         camcontrol.MaxHigh = Camera_player_max_high;
         camcontrol.MaxLow = Camera_player_max_low;
         deathscript.erreurmax = Death_cube_collid_error;
-        foreach (GameObject cube in movingcubes)
-        {
-            Movingelements scriptMoving = cube.GetComponent<Movingelements>();
-            scriptMoving.speed = Game_speed;
-        }
-
-        foreach (GameObject spike in movingspikes)
-        {
-            Movingelements scriptMoving = spike.GetComponent<Movingelements>();
-            scriptMoving.speed = Game_speed;
-        }
+        movingscript.speed = Game_speed;
 
         if (Game_Reset)
         {
-            foreach (GameObject cube in movingcubes)
+            if (!antiloop)
             {
-                Movingelements scriptMoving = cube.GetComponent<Movingelements>();
-                scriptMoving.dowereset = true;
+                movingscript.dowereset = true;
+                antiloop = true;
             }
 
-            foreach (GameObject spike in movingspikes)
+            if (!movingscript.dowereset)
             {
-                Movingelements scriptMoving = spike.GetComponent<Movingelements>();
-                scriptMoving.dowereset = true;
+                gameObject.transform.position = new Vector3(0, 1, deathscript.Posref);
+                Camera.transform.position = new Vector3(Camera.transform.position.x, originecamera, Camera.transform.position.z);
+                deathscript.dead = false;
+                Game_Reset = false;
+                movingscript.canmove = true;
+                antiloop = false;
             }
-            gameObject.transform.position = new Vector3 (0, 1, deathscript.Posref);
-            Camera.transform.position = new Vector3(Camera.transform.position.x, originecamera, Camera.transform.position.z);
-            deathscript.dead = false;
-            Game_Reset = false;
         }
     }
 }

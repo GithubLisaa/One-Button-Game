@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class Death : MonoBehaviour
 {
-    private GameObject[] movingcubes;
     private GameObject[] movingspikes;
     private GameObject[] deathscreen;
+    private GameObject Movingelements;
+    private Movingelements movingscript;
 
     public bool dead = false;
     public float Posref = 0f;
@@ -15,7 +16,8 @@ public class Death : MonoBehaviour
 
     void Start()
     {
-        movingcubes = GameObject.FindGameObjectsWithTag("MovingCube");
+        Movingelements = GameObject.FindGameObjectWithTag("MovingElements");
+        movingscript = Movingelements.GetComponent<Movingelements>();
         movingspikes = GameObject.FindGameObjectsWithTag("MovingSpike");
         deathscreen = GameObject.FindGameObjectsWithTag("DeathScreen");
         dead = false;
@@ -29,16 +31,7 @@ public class Death : MonoBehaviour
                 MeshRenderer mesh = Deathscreen.GetComponent<MeshRenderer>();
                 mesh.enabled = true;
             }
-            foreach (GameObject cube in movingcubes)
-            {
-                Movingelements scriptMoving = cube.GetComponent<Movingelements>();
-                scriptMoving.canmove = false;
-            }
-            foreach (GameObject spike in movingspikes)
-            {
-                Movingelements scriptMoving = spike.GetComponent<Movingelements>();
-                scriptMoving.canmove = false;
-            }
+            movingscript.canmove = false;
         }
         else
         {
@@ -59,17 +52,7 @@ public class Death : MonoBehaviour
     {
         if (spikes.gameObject.CompareTag("MovingSpike"))
         {
-            foreach (GameObject cube in movingcubes)
-            {
-                Movingelements scriptMoving = cube.GetComponent<Movingelements>();
-                scriptMoving.canmove = false;
-            }
-
-            foreach (GameObject spike in movingspikes)
-            {
-                Movingelements scriptMoving = spike.GetComponent<Movingelements>();
-                scriptMoving.canmove = false;
-            }
+            movingscript.canmove = false;
             dead = true;
         }
     }

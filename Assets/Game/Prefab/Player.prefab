@@ -180,7 +180,7 @@ MonoBehaviour:
   Game_speed: 11
   Gravity: 100
   Jump_force: 19
-  Death_cube_collid_error: 0.1
+  Death_cube_collid_error: 0.15
   Camera_player_max_high: 2
   Camera_player_max_low: 3.5
   Game_Reset: 0
