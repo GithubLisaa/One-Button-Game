@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameControl : MonoBehaviour
@@ -100,6 +99,7 @@ public class GameControl : MonoBehaviour
                     Fakeblock scriptfakeblock = fakeblock.GetComponent<Fakeblock>();
                     scriptfakeblock.meshstatue = true;
                 }
+                Camera.GetComponent<AudioSource>().Play();
             }
         }
     }

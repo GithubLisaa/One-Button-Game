@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Death : MonoBehaviour
 {
     private GameObject[] movingspikes;
     private GameObject[] deathscreen;
+    private GameObject Camera;
     private GameObject Movingelements;
     private Movingelements movingscript;
 
@@ -16,6 +16,7 @@ public class Death : MonoBehaviour
 
     void Start()
     {
+        Camera = GameObject.FindGameObjectWithTag("MainCamera");
         Movingelements = GameObject.FindGameObjectWithTag("MovingElements");
         movingscript = Movingelements.GetComponent<Movingelements>();
         movingspikes = GameObject.FindGameObjectsWithTag("MovingSpike");
@@ -26,6 +27,7 @@ public class Death : MonoBehaviour
     {
         if (dead)
         {
+            Camera.GetComponent<AudioSource>().Stop();
             foreach (GameObject Deathscreen in deathscreen)
             {
                 MeshRenderer mesh = Deathscreen.GetComponent<MeshRenderer>();
