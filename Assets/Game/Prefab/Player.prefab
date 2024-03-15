@@ -234,7 +234,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 114
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!114 &7641947152438367500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,7 +292,7 @@ MonoBehaviour:
   Game_speed: 11
   Gravity: 100
   Jump_force: 19
-  Death_cube_collid_error: 1
+  Death_cube_collid_error: 0.3
   Camera_player_max_high: 2
   Camera_player_max_low: 3.5
   Bumper_force: 29
