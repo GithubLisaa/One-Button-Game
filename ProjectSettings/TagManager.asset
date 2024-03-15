@@ -16,6 +16,7 @@ TagManager:
   - Speed_Boost
   - Speed_Reset
   - Falling_Platform
+  - sphere_bumper
   layers:
   - Default
   - TransparentFX

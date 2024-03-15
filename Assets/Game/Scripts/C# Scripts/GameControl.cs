@@ -26,6 +26,7 @@ public class GameControl : MonoBehaviour
     public float Camera_player_max_high = 1f;
     public float Camera_player_max_low = 1f;
     public float Bumper_force = 1f;
+    public float Sphere_bump_force = 1f;
     public float Speed_Boost = 1f;
     public float Crumble_Shake = 1f;
     public float Platform_Timer = 1f;
@@ -57,6 +58,7 @@ public class GameControl : MonoBehaviour
     {
         jump.jumpforce = Jump_force;
         boosterscript.Bumperforce = Bumper_force;
+        boosterscript.sphere_bumper_force = Sphere_bump_force;
         Physics.gravity = new Vector3(0, -Gravity, 0);
         camcontrol.MaxHigh = Camera_player_max_high;
         camcontrol.MaxLow = Camera_player_max_low;

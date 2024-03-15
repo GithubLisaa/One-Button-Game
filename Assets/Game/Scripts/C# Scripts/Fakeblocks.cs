@@ -23,7 +23,7 @@ public class Fakeblock : MonoBehaviour
     }
     void OnTriggerEnter(Collider element)
     {
-        if (element.gameObject.CompareTag("Player") && !deathscript.dead)
+        if (element.gameObject.CompareTag("Player") || element.gameObject.CompareTag("Falling_Platform") && !deathscript.dead)
         {
             gameObject.GetComponent<ParticleSystem>().Play();
             meshstatue = false;
