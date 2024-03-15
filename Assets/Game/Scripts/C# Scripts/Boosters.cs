@@ -31,7 +31,14 @@ public class Boosters : MonoBehaviour
 
         if (element.gameObject.tag == "Bumper" && !deathscript.dead)
         {
-            rbody.AddForce(new Vector3(0, Bumperforce, 0), ForceMode.Impulse);
+            if (gamecontrolscript.Gravity > 0)
+            {
+                rbody.AddForce(new Vector3(0, Bumperforce, 0), ForceMode.Impulse);
+            }
+            else
+            {
+                rbody.AddForce(new Vector3(0, -Bumperforce, 0), ForceMode.Impulse);
+            }
         }
         if (element.gameObject.tag == "Speed_Boost" && !deathscript.dead)
         {
