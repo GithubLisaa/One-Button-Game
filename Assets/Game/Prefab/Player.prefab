@@ -232,9 +232,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 114
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!114 &7641947152438367500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bumperforce: 1
+  sphere_bumper_force: 1
 --- !u!114 &5712746266603793992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +297,7 @@ MonoBehaviour:
   Camera_player_max_high: 2
   Camera_player_max_low: 3.5
   Bumper_force: 29
+  Sphere_bump_force: 1
   Speed_Boost: 11
   Crumble_Shake: 0.2
   Platform_Timer: 0.3

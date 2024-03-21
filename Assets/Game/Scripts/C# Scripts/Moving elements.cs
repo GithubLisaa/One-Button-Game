@@ -19,7 +19,7 @@ public class Movingelements : MonoBehaviour
     {
         if (canmove)
         {
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            transform.Translate(Vector3.back * speed * Time.deltaTime);
             if (dowereset)
             {
                 transform.position = transformorigin;
