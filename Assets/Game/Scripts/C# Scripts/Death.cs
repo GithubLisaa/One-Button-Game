@@ -46,7 +46,7 @@ public class Death : MonoBehaviour
 
         if (Mathf.Abs(transform.position.z - Posref) > erreurmax)
         {
-            dead = true;
+            //dead = true;
         }
     }
 

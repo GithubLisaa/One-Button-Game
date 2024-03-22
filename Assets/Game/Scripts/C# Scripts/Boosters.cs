@@ -33,10 +33,12 @@ public class Boosters : MonoBehaviour
         {
             if (gamecontrolscript.Gravity > 0)
             {
+                rbody.velocity = Vector3.zero;
                 rbody.AddForce(new Vector3(0, Bumperforce, 0), ForceMode.Impulse);
             }
             else
             {
+                rbody.velocity = Vector3.zero;
                 rbody.AddForce(new Vector3(0, -Bumperforce, 0), ForceMode.Impulse);
             }
         }
