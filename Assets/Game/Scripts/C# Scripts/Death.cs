@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Death : MonoBehaviour
 {
-    private GameObject[] movingspikes;
-    private GameObject[] deathscreen;
     private GameObject Camera;
     private GameObject Movingelements;
     private Movingelements movingscript;
@@ -19,8 +17,6 @@ public class Death : MonoBehaviour
         Camera = GameObject.FindGameObjectWithTag("MainCamera");
         Movingelements = GameObject.FindGameObjectWithTag("MovingElements");
         movingscript = Movingelements.GetComponent<Movingelements>();
-        movingspikes = GameObject.FindGameObjectsWithTag("MovingSpike");
-        deathscreen = GameObject.FindGameObjectsWithTag("DeathScreen");
         dead = false;
     }
     void Update()
@@ -28,28 +24,14 @@ public class Death : MonoBehaviour
         if (dead)
         {
             Camera.GetComponent<AudioSource>().Stop();
-            foreach (GameObject Deathscreen in deathscreen)
-            {
-                MeshRenderer mesh = Deathscreen.GetComponent<MeshRenderer>();
-                mesh.enabled = true;
-            }
             movingscript.canmove = false;
-        }
-        else
-        {
-            foreach (GameObject Deathscreen in deathscreen)
-            {
-                MeshRenderer mesh = Deathscreen.GetComponent<MeshRenderer>();
-                mesh.enabled = false;
-            }
         }
 
         if (Mathf.Abs(transform.position.z - Posref) > erreurmax)
         {
-            //dead = true;
+            dead = true;
         }
     }
-
     void OnTriggerEnter(Collider spikes)
     {
         if (spikes.gameObject.CompareTag("MovingSpike"))

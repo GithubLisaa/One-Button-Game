@@ -17,6 +17,10 @@ TagManager:
   - Speed_Reset
   - Falling_Platform
   - sphere_bumper
+  - Deathscreen
+  - Deathtexte
+  - End
+  - Wintexte
   layers:
   - Default
   - TransparentFX

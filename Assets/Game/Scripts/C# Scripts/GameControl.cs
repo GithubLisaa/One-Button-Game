@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class GameControl : MonoBehaviour
     private GameObject[] FallingPlatforms;
     private GameObject Movingelements;
     private GameObject Camera;
+    private GameObject Deathscreen;
+    private GameObject Deathtexte;
+    private GameObject Wintexte;
     private Death deathscript;
     private Jump jump;
     private Camera_Control camcontrol;
@@ -26,7 +30,6 @@ public class GameControl : MonoBehaviour
     public float Camera_player_max_high = 1f;
     public float Camera_player_max_low = 1f;
     public float Bumper_force = 1f;
-    public float Sphere_bump_force = 1f;
     public float Speed_Boost = 1f;
     public float Crumble_Shake = 1f;
     public float Platform_Timer = 1f;
@@ -36,6 +39,9 @@ public class GameControl : MonoBehaviour
     {
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
         Camera = GameObject.FindGameObjectWithTag("MainCamera");
+        Deathscreen = GameObject.FindGameObjectWithTag("Deathscreen");
+        Deathtexte = GameObject.FindGameObjectWithTag("Deathtexte");
+        Wintexte = GameObject.FindGameObjectWithTag("Wintexte");
         Fakeblocks = GameObject.FindGameObjectsWithTag("Fake_Block");
         FallingPlatforms = GameObject.FindGameObjectsWithTag("Falling_Platform");
         originecamera = Camera.transform.position.y;
@@ -46,6 +52,9 @@ public class GameControl : MonoBehaviour
         jump = gameObject.GetComponent<Jump>();
         boosterscript = gameObject.GetComponent<Boosters>();
         gamespeedorigin = Game_speed;
+        Deathtexte.SetActive(false);
+        Wintexte.SetActive(false);
+        Deathscreen.SetActive(false);
         foreach (GameObject platforms in FallingPlatforms)
         {
             FallingPlatform platformscript = platforms.GetComponent<FallingPlatform>();
@@ -58,7 +67,6 @@ public class GameControl : MonoBehaviour
     {
         jump.jumpforce = Jump_force;
         boosterscript.Bumperforce = Bumper_force;
-        boosterscript.sphere_bumper_force = Sphere_bump_force;
         Physics.gravity = new Vector3(0, -Gravity, 0);
         camcontrol.MaxHigh = Camera_player_max_high;
         camcontrol.MaxLow = Camera_player_max_low;
@@ -67,6 +75,8 @@ public class GameControl : MonoBehaviour
         if (deathscript.dead)
         {
             gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            Deathscreen.SetActive(true);
+            Deathtexte.SetActive(true);
         }
 
         if (Game_Reset)
@@ -102,7 +112,29 @@ public class GameControl : MonoBehaviour
                     scriptfakeblock.meshstatue = true;
                 }
                 Camera.GetComponent<AudioSource>().Play();
+                Deathtexte.SetActive(false);
+                Wintexte.SetActive(false);
+                Deathscreen.SetActive(false);
             }
         }
+    }
+    void OnTriggerEnter(Collider end)
+    {
+        if (end.gameObject.CompareTag("End"))
+        {
+            movingscript.canmove = false;
+            Camera.GetComponent<AudioSource>().volume = 0.2f;
+            Deathscreen.SetActive(true);
+            Wintexte.SetActive(true);
+        }
+    }
+
+    public void ButtonPressedRestart()
+    {
+        Game_Reset = true;
+    }
+    public void ButtonPressedMenu()
+    {
+        SceneManager.LoadScene("StartMenu");
     }
 }

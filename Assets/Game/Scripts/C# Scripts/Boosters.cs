@@ -9,7 +9,6 @@ public class Boosters : MonoBehaviour
     private Death deathscript;
 
     public float Bumperforce = 1f;
-    public float sphere_bumper_force = 1f;
     void Start()
     {
         gamecontrolscript = GetComponent<GameControl>();
@@ -59,12 +58,10 @@ public class Boosters : MonoBehaviour
                 {
                     Debug.Log("E");
                     rbody.velocity = Vector3.zero;
-                    rbody.AddForce(new Vector3(0, sphere_bumper_force, 0), ForceMode.Impulse);
                 }
                 else
                 {
                     rbody.velocity = Vector3.zero;
-                    rbody.AddForce(new Vector3(0, -sphere_bumper_force, 0), ForceMode.Impulse);
                 }
             }
         }

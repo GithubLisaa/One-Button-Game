@@ -32,7 +32,7 @@ public class Jump : MonoBehaviour
 
         if (Input.anyKey && onfloor && !isjumping && !deathscript.dead)
         {
-            //gameObject.transform.position = new Vector3(0, transform.position.y, 0);
+            gameObject.transform.position = new Vector3(0, transform.position.y, 0);
             if (gamecontrolscript.Gravity>0)
             {
                 rbody.AddForce(new Vector3(0, jumpforce, 0), ForceMode.Impulse);
